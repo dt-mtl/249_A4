@@ -3,7 +3,6 @@ package part1;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -56,19 +55,12 @@ public class Subdictionary {
      */
     public static String readFile(String name) throws FileNotFoundException{
     String text="";
-    try{
-        FileInputStream doc = new FileInputStream("src/part1/"+name+".txt");
-        int info;
-        while((info=doc.read())!=-1){
-            text=text+Character.toString(info);
+    FileInputStream foo = new FileInputStream("src/part1/"+name+".txt");
+    Scanner sc = new Scanner(foo.getChannel());
 
+        while(sc.hasNext()){
+            text+=sc.next()+" ";
         }
-
-    }catch (FileNotFoundException e){
-        System.err.println("cant find the file");
-    } catch (IOException e) { //todo get rid of this exception
-        e.printStackTrace();
-    }
 
         return text;
 }
